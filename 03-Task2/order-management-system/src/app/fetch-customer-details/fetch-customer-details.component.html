@@ -1,0 +1,19 @@
+<div>
+    <h2>Fetch Customer Details</h2>
+    <form (ngSubmit)="onSubmit()">
+      <label for="orderId">Order ID:</label>
+      <input type="number" id="orderId" [(ngModel)]="orderId" name="orderId" required>
+      <button type="submit">Fetch Customer Details</button>
+    </form>
+  
+    <div *ngIf="customer">
+      <h3>Customer Details</h3>
+      <p>Name: {{ customer.name }}</p>
+      <p>Email: {{ customer.email }}</p>
+    </div>
+  
+    <div *ngIf="customer === null && orderId">
+      <p>No customer found for Order ID {{ orderId }}</p>
+    </div>
+  </div>
+  

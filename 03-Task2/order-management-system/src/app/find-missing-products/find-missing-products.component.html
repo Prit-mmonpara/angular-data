@@ -1,0 +1,22 @@
+<div>
+    <h2>Find Missing Products</h2>
+    <form (ngSubmit)="onSubmit()">
+      <label for="orderId">Order ID:</label>
+      <input type="number" id="orderId" [(ngModel)]="orderId" name="orderId" required>
+      <button type="submit">Find Missing Products</button>
+    </form>
+  
+    <div *ngIf="missingProducts.length > 0">
+      <h3>Missing Products</h3>
+      <ul>
+        <li *ngFor="let productId of missingProducts">
+          Product ID: {{ productId }}
+        </li>
+      </ul>
+    </div>
+  
+    <div *ngIf="missingProducts.length === 0 && orderId">
+      <p>No missing products found for Order ID {{ orderId }}</p>
+    </div>
+  </div>
+  

@@ -1,0 +1,28 @@
+<div>
+    <h2>Generate Order Summary</h2>
+    <form (ngSubmit)="onSubmit()">
+      <label for="orderId">Order ID:</label>
+      <input type="number" id="orderId" [(ngModel)]="orderId" name="orderId" required>
+      <button type="submit">Generate Summary</button>
+    </form>
+  
+    <div *ngIf="orderSummary">
+      <h3>Order Summary</h3>
+      <p>Order ID: {{ orderSummary.orderId }}</p>
+      <h4>Customer</h4>
+      <p>Name: {{ orderSummary.customer.name }}</p>
+      <p>Email: {{ orderSummary.customer.email }}</p>
+      <h4>Products</h4>
+      <ul>
+        <li *ngFor="let product of orderSummary.products">
+          {{ product.name }} - Quantity: {{ product.quantity }} - Price: ${{ product.price }}
+        </li>
+      </ul>
+      <h4>Total Value: ${{ orderSummary.totalValue }}</h4>
+    </div>
+  
+    <div *ngIf="orderSummary === null && orderId">
+      <p>No order found for Order ID {{ orderId }}</p>
+    </div>
+  </div>
+  

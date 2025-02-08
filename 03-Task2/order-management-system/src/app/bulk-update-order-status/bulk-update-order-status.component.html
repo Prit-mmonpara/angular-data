@@ -1,0 +1,50 @@
+<div>
+  <h2>Bulk Update Order Status</h2>
+  <form (ngSubmit)="onSubmit()">
+    <div *ngFor="let update of updates; let i = index">
+      <label for="orderId-{{ i }}">Order ID:</label>
+      <input
+        type="number"
+        id="orderId-{{ i }}"
+        [(ngModel)]="update.orderId"
+        name="orderId-{{ i }}"
+        required
+      />
+      <label for="newStatus-{{ i }}">New Status:</label>
+      <input
+        type="text"
+        id="newStatus-{{ i }}"
+        [(ngModel)]="update.newStatus"
+        name="newStatus-{{ i }}"
+        required
+      />
+    </div>
+    <div>
+      <label for="newOrderId">Order ID:</label>
+      <input
+        type="number"
+        id="newOrderId"
+        [(ngModel)]="newUpdate.orderId"
+        name="newOrderId"
+      />
+      <label for="newOrderStatus">New Status:</label>
+      <input
+        type="text"
+        id="newOrderStatus"
+        [(ngModel)]="newUpdate.newStatus"
+        name="newOrderStatus"
+      />
+      <button type="button" (click)="addUpdate()">Add</button>
+    </div>
+    <button type="submit">Update Orders</button>
+  </form>
+
+  <div *ngIf="updatedOrders.length > 0">
+    <h3>Updated Orders</h3>
+    <ul>
+      <li *ngFor="let order of updatedOrders">
+        Order ID: {{ order.orderId }} - Status: {{ order.status }}
+      </li>
+    </ul>
+  </div>
+</div>

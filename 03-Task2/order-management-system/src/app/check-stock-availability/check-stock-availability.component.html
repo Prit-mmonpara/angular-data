@@ -1,0 +1,15 @@
+<div>
+    <h2>Check Stock Availability</h2>
+    <form (ngSubmit)="onSubmit()">
+      <label for="orderId">Order ID:</label>
+      <input type="number" id="orderId" [(ngModel)]="orderId" name="orderId" required>
+      <button type="submit">Check Stock Availability</button>
+    </form>
+  
+    <div *ngIf="stockAvailable !== null">
+      <h3>Stock Availability</h3>
+      <p *ngIf="stockAvailable">Stock is sufficient to fulfill the order.</p>
+      <p *ngIf="!stockAvailable">Stock is insufficient to fulfill the order.</p>
+    </div>
+  </div>
+  

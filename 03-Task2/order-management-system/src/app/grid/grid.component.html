@@ -1,0 +1,35 @@
+<div>
+    <h2>Search Orders</h2>
+    
+    <label for="criteria">Search By:</label>
+    <select id="criteria" [(ngModel)]="searchCriteria">
+      <option value="orderId">Order ID</option>
+      <option value="customerId">Customer ID</option>
+      <option value="status">Status</option>
+    </select>
+    
+    <input type="text" [(ngModel)]="searchText" placeholder="Enter search text">
+    <button (click)="onSearch()">Search</button>
+  </div>
+  <div *ngIf="products">
+    <h3>Search Results</h3>
+    <table>
+      <thead>
+        <tr>
+          <th *ngFor="let column of columns">{{ column }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of searchResults">
+          <td>{{ row.orderId }}</td>
+          <td>{{ row.customerId }}</td>
+          <td>{{ row.status }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <div *ngIf="searchResults.length === 0 && searchText !== ''">
+    <p>No results found for the given search criteria.</p>
+  </div>
+  

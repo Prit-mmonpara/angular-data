@@ -1,0 +1,22 @@
+<div>
+    <h2>Find Orders by Customer</h2>
+    <form (ngSubmit)="onSubmit()">
+      <label for="customerId">Customer ID:</label>
+      <input type="number" id="customerId" [(ngModel)]="customerId" name="customerId" required>
+      <button type="submit">Find Orders</button>
+    </form>
+  
+    <div *ngIf="orders.length > 0">
+      <h3>Orders</h3>
+      <ul>
+        <li *ngFor="let order of orders">
+          Order ID: {{ order.orderId }} - Status: {{ order.status }}
+        </li>
+      </ul>
+    </div>
+  
+    <div *ngIf="orders.length === 0 && customerId">
+      <p>No orders found for Customer ID {{ customerId }}</p>
+    </div>
+  </div>
+  

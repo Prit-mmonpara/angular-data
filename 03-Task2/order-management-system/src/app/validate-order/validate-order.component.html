@@ -1,0 +1,14 @@
+<div>
+    <h2>Validate Order</h2>
+    <form (ngSubmit)="onSubmit()">
+      <label for="orderId">Order ID:</label>
+      <input type="number" id="orderId" [(ngModel)]="orderId" name="orderId" required>
+      <button type="submit">Validate Order</button>
+    </form>
+  
+    <div *ngIf="validationResult">
+      <h3>Validation Result</h3>
+      <p>{{ validationResult }}</p>
+    </div>
+  </div>
+  

@@ -1,0 +1,93 @@
+<div>
+  <h2>Add Order</h2>
+  <form (ngSubmit)="addOrder()" #orderForm="ngForm">
+    <label for="orderId">Order ID:</label>
+    <input type="number" id="orderId" [(ngModel)]="newOrder.orderId" name="orderId" required>
+    <div *ngIf="orderForm.submitted && !newOrder.orderId" class="error">Order ID is required</div>
+
+    <label for="customerId">Customer ID:</label>
+    <input type="number" id="customerId" [(ngModel)]="newOrder.customerId" name="customerId" required>
+    <div *ngIf="orderForm.submitted && !newOrder.customerId" class="error">Customer ID is required</div>
+
+    <div *ngFor="let product of newOrder.products; let i = index">
+      <label for="productId-{{i}}">Product ID:</label>
+      <input type="number" id="productId-{{i}}" [(ngModel)]="product.productId" name="productId-{{i}}" required>
+      <div *ngIf="orderForm.submitted && !product.productId" class="error">Product ID is required</div>
+
+      <label for="quantity-{{i}}">Quantity:</label>
+      <input type="number" id="quantity-{{i}}" [(ngModel)]="product.quantity" name="quantity-{{i}}" required min="1">
+      <div *ngIf="orderForm.submitted && product.quantity <= 0" class="error">Quantity must be at least 1</div>
+
+      <button type="button" (click)="removeProductFromOrder(i)">Remove</button>
+    </div>
+    
+    <button type="button" (click)="addProductToOrder()">Add Another Product</button>
+    
+    <label for="status">Status:</label>
+    <input type="text" id="status" [(ngModel)]="newOrder.status" name="status" required>
+    <div *ngIf="orderForm.submitted && !newOrder.status" class="error">Status is required</div>
+
+    <button type="submit">Add Order</button>
+  </form>
+  <div *ngIf="orderErrorMessage" class="error">
+    {{ orderErrorMessage }}
+  </div>
+  <div *ngIf="orderSuccessMessage" class="success">
+    {{ orderSuccessMessage }}
+  </div>
+</div>
+
+<div>
+  <h2>Add Customer</h2>
+  <form (ngSubmit)="addCustomer()" #customerForm="ngForm">
+    <label for="customerId">Customer ID:</label>
+    <input type="number" id="customerId" [(ngModel)]="newCustomer.customerId" name="customerId" required>
+    <div *ngIf="customerForm.submitted && !newCustomer.customerId" class="error">Customer ID is required</div>
+
+    <label for="customerName">Name:</label>
+    <input type="text" id="customerName" [(ngModel)]="newCustomer.name" name="customerName" required>
+    <div *ngIf="customerForm.submitted && !newCustomer.name" class="error">Name is required</div>
+
+    <label for="customerEmail">Email:</label>
+    <input type="email" id="customerEmail" [(ngModel)]="newCustomer.email" name="customerEmail" required email>
+    <div *ngIf="customerForm.submitted && !newCustomer.email" class="error">Email is required</div>
+    <div *ngIf="customerForm.submitted && customerForm.controls['customerEmail']?.invalid && customerForm.controls['customerEmail']?.touched" class="error">Invalid email address</div>
+
+    <button type="submit">Add Customer</button>
+  </form>
+  <div *ngIf="customerErrorMessage" class="error">
+    {{ customerErrorMessage }}
+  </div>
+  <div *ngIf="customerSuccessMessage" class="success">
+    {{ customerSuccessMessage }}
+  </div>
+</div>
+
+<div>
+  <h2>Add Product</h2>
+  <form (ngSubmit)="addProduct()" #productForm="ngForm">
+    <label for="productId">Product ID:</label>
+    <input type="number" id="productId" [(ngModel)]="newProduct.productId" name="productId" required>
+    <div *ngIf="productForm.submitted && !newProduct.productId" class="error">Product ID is required</div>
+
+    <label for="productName">Name:</label>
+    <input type="text" id="productName" [(ngModel)]="newProduct.name" name="productName" required>
+    <div *ngIf="productForm.submitted && !newProduct.name" class="error">Name is required</div>
+
+    <label for="productPrice">Price:</label>
+    <input type="number" id="productPrice" [(ngModel)]="newProduct.price" name="productPrice" required min="0.01">
+    <div *ngIf="productForm.submitted && (!newProduct.price || newProduct.price <= 0)" class="error">Valid Price is required</div>
+
+    <label for="productStock">Stock:</label>
+    <input type="number" id="productStock" [(ngModel)]="newProduct.stock" name="productStock" required min="0">
+    <div *ngIf="productForm.submitted && newProduct.stock < 0" class="error">Stock cannot be negative</div>
+
+    <button type="submit">Add Product</button>
+  </form>
+  <div *ngIf="productErrorMessage" class="error">
+    {{ productErrorMessage }}
+  </div>
+  <div *ngIf="productSuccessMessage" class="success">
+    {{ productSuccessMessage }}
+  </div>
+</div>

@@ -1,0 +1,26 @@
+<div class="header">
+  <h1>Order Management System</h1>
+</div>
+
+<nav>
+  <a routerLink="/add-data" routerLinkActive="active">Add Data</a>
+  <a routerLink="/grid" routerLinkActive="active">Search</a>
+  <a routerLink="/find-orders" routerLinkActive="active">Find Orders</a>
+  <a routerLink="/fetch-customer-details" routerLinkActive="active">Fetch Customer Details</a>
+  <a routerLink="/check-stock-availability" routerLinkActive="active">Check Stock Availability</a>
+  <a routerLink="/validate-order" routerLinkActive="active">Validate Order</a>
+  <a routerLink="/calculate-total-revenue" routerLinkActive="active" (click)="onClick()">Calculate Total Revenue</a> <!-- Updated function call -->
+  <a routerLink="/generate-order-summary" routerLinkActive="active">Generate Order Summary</a>
+  <a routerLink="/find-orders-by-customer" routerLinkActive="active">Find Orders by Customer</a>
+  <a routerLink="/find-missing-products" routerLinkActive="active">Find Missing Products</a>
+  <a routerLink="/bulk-update-order-status" routerLinkActive="active">Bulk Update Order Status</a>
+</nav>
+
+<router-outlet></router-outlet>
+
+<!-- Conditionally display Calculate Total Revenue Component -->
+<app-calculate-total-revenue *ngIf="showRevenue" [status]="status" (revenueCalculated)="handleRevenueCalculated($event)"></app-calculate-total-revenue>
+
+<div *ngIf="showRevenue"> 
+  <h3>Total Revenue: {{ totalRevenue }}</h3> 
+</div>
